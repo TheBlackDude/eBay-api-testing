@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import sys
+import requests
+import json
 
 # eBay Creds
 # headers = {
@@ -44,6 +46,12 @@ def get_arguments():
         return arg, message
     else:
         return arg, message
+
+# Get data from the jsonplaceholder api
+def fetch_data():
+    # get all posts
+    response = requests.get('https://jsonplaceholder.typicode.com/posts')
+    return response.json()
 
 
 
