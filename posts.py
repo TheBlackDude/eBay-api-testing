@@ -9,7 +9,7 @@ import requests
 #     'X-EBAY-API-CERT-NAME': '00dd08ab-2082-4e3c-9518-5f4298f296db',
 #     'X-EBAY-API-DEV-NAME': '16a26b1b-26cf-442d-906d-597b60c41c19',
 #     'X-EBAY-API-SITEID': 0,
-#     'X-EBAY-API-COMPATIBILITY-LEVEL': 861
+#     'X-EBAY-API-COMPATIBILITY-LEVEL': 1077
 # }
 #
 # xml_data = '''

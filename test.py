@@ -1,10 +1,26 @@
 import os
 import unittest
 from unittest.mock import patch
-from posts import fetch_data
+from posts import get_arguments, fetch_data
 from db_functions import create_db, save_posts, get_all_posts, get_post_by_id
 
 class TestCategories(unittest.TestCase):
+
+    @patch('posts.sys.argv', ['file', '--render']) # mock the command-line args
+    def test_get_arguments_return_command_line_args(self):
+        arg, msg = get_arguments()
+
+        self.assertIsNone(msg)
+        self.assertEqual(arg, ['--render'])
+
+
+    @patch('posts.sys.argv', ['file'])
+    def test_get_arguments_return_message_if_no_args_passed(self):
+        arg, msg = get_arguments()
+
+        self.assertIsNone(arg)
+        self.assertEqual(msg, '############ You need to pass an argument #########')
+    
 
     @patch('posts.requests.get') # mock the api call
     def test_fetch_data_return_json(self, mock_request):
