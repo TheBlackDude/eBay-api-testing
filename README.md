@@ -13,5 +13,16 @@
 *Run '--rebuild' to download the data and create the database*
 *python3 posts.py --rebuild*
 
-*Run '--render' 'id' to generate a html page with the 'id' post data*
+*Run '--render' 'id' to generate a html page with an 'ids' post data*
 *python3 posts.py --render 100*
+
+#### You can also use the bash script to execute the commands
+
+*to run the tests*
+*./posts.sh tests*
+
+*to download the data and create the database*
+*./posts.sh --rebuild*
+
+*to generate a html page with an 'ids' post data*
+*./posts.sh --render 100*
