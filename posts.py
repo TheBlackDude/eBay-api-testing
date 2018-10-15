@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import sys
 import requests
+from db_functions import create_db, save_posts, get_all_posts, get_post_by_id
 
 # eBay Creds
 # headers = {
@@ -52,11 +53,34 @@ def fetch_data():
     response = requests.get('https://jsonplaceholder.typicode.com/posts')
     return response.json()
 
+# Save posts into the database
+def build_db(arg):
+    if arg == '--rebuild':
+        create_db()
+        data = fetch_data()
+        for post in data:
+            save_posts(post.get('id'), post.get('title'), post.get('body'))
+        return 'posts saved successfully'
+    return '##### Please pass the argument "--rebuild" #####'
+
+# Render post
+def render_post(args):
+    if args[0] == '--render':
+        post = get_post_by_id(int(args[1]))
+        if post:
+            return post
+        return '##### Post not found #####'
+    return '##### Please pass "--render" as the first argument #####'
+
 
 
 if __name__ == '__main__':
-    arg, msg = get_arguments()
+    args, msg = get_arguments()
     if msg:
         print(msg)
+    elif len(args) == 1:
+        db_msg = build_db(args[0])
+        print(db_msg)
     else:
-        print(arg)
+        post = render_post(args)
+        print(post)
