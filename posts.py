@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import os
 import sys
 import requests
 from db_functions import create_db, save_posts, get_all_posts, get_post_by_id
@@ -49,6 +50,10 @@ def get_arguments():
 
 # Get data from the jsonplaceholder api
 def fetch_data():
+    # Call the ebay api
+    # response = requests.post('https://api.sandbox.ebay.com/ws/api.dll',
+    #                          headers=headers, data=xml_data)
+
     # get all posts
     response = requests.get('https://jsonplaceholder.typicode.com/posts')
     return response.json()
@@ -63,12 +68,35 @@ def build_db(arg):
         return 'posts saved successfully'
     return '##### Please pass the argument "--rebuild" #####'
 
+# Generate html
+def generate_html(id, post):
+    file_name = '{}.{}'.format(id, 'html')
+    with open(file_name, 'w') as html_file:
+        html = '''
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="utf-8">
+        <title>Generated With Python</title>
+        </head>
+        <body>
+        <h2>Post Title: {title}</h2>
+        <strong>{body}</strong>
+        </body>
+        </html>
+        '''.format(title=post[1], body=post[2])
+        html_file.write(html)
+    if '{}.{}'.format(id,'html') in os.listdir():
+        return '##### html generated successfully #####'
+    return '##### Sorry something went wrong #####'
+
 # Render post
 def render_post(args):
     if args[0] == '--render':
         post = get_post_by_id(int(args[1]))
         if post:
-            return post
+            msg = generate_html(int(args[1]), post)
+            return msg
         return '##### Post not found #####'
     return '##### Please pass "--render" as the first argument #####'
 

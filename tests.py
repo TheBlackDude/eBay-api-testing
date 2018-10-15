@@ -77,7 +77,7 @@ class TestCategories(unittest.TestCase):
         self.assertEqual(bad_arg_msg, '##### Please pass the argument "--rebuild" #####')
 
 
-    def test_render_post_return_post_if_correct_arg_passed_and_id_found(self):
+    def test_render_post_generate_html_if_correct_arg_passed_and_id_found(self):
         create_db()
         data = [
             {'id': 1, 'title': 'test1', 'body': 'am the champ'},
@@ -86,8 +86,8 @@ class TestCategories(unittest.TestCase):
 
         for post in data:
             save_posts(post.get('id'), post.get('title'), post.get('body'))
-        post = render_post(['--render', '1'])
-        self.assertEqual(post[1], data[0].get('title'))
+        msg = render_post(['--render', '1'])
+        self.assertEqual(msg, '##### html generated successfully #####')
         bad_arg_post = render_post(['--rebuild', '1'])
         self.assertEqual(bad_arg_post, '##### Please pass "--render" as the first argument #####')
         bad_id_post = render_post(['--render', '1000'])
