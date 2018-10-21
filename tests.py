@@ -115,8 +115,6 @@ class TestCategories(unittest.TestCase):
         save_categories(data)
         msg = render_categories(['--render', '3'])
         self.assertEqual(msg, '##### html generated successfully #####')
-        bad_arg = render_categories(['--rebuild', '1'])
-        self.assertEqual(bad_arg, '##### Please pass "--render" as the first argument #####')
         bad_category_id = render_categories(['--render', '1000'])
         self.assertEqual(bad_category_id, '##### Category not found #####')
 

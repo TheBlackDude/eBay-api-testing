@@ -7,7 +7,7 @@ show_help() {
   ---------------------------------
   tests         : Run the tests
   --rebuild     : Download the data from the api and create the database
-  --render      : Generate a html page with the given id's post
+  --render      : Generate a html page with the given id's category
   """
 }
 
@@ -18,11 +18,11 @@ case "$1" in
   ;;
   "--rebuild" )
     # rebuild database
-    python3 posts.py --rebuild
+    python3 categories.py --rebuild
   ;;
   "--render" )
     # render post
-    python3 posts.py --render "${@:2}"
+    python3 categories.py --render "${@:2}"
   ;;
   * )
   show_help
