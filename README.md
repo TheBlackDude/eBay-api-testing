@@ -1,5 +1,4 @@
 # eBay-api-testing
-**Note: The program uses the (jsonplaceholder) api, because the eBay api wasn't working**
 
 #### Install
 *git clonse 'repo'*
